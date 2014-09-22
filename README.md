@@ -2,8 +2,7 @@ tic-tac-toe
 ===========
 a simple game of tic tac toe. made with javascript.
 
-konami code
------------
+### konami code
 The Konami Code (Japanese: コナミコマンド, Konami komando, "Konami command") is a cheat code that appears in many Konami video games, although the code also appears in some non-Konami games.
 
 The code was first used in the 1986 release of Gradius for the Family Computer/Nintendo Entertainment System but was popularized among North American players in the NES version of Contra, for which it was also dubbed both the "Contra Code" and "30 Lives Code".
