@@ -82,7 +82,7 @@ var end_game = {
             score_2 = score_2+1;
             score = score_2;
         }
-
+        console.log(score)
         $('#player-'+turn.current_player()+' .score-total').text(score);
         $('.results h2').text('Player '+ t +' wins the game!');
     },
