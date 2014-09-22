@@ -1,12 +1,9 @@
-body {
-    /*background-image: url(../img/bg-random.jpg);
-    /*background-size: cover;
-    */
-}
+@color1: #ffffff;
+@color2: #ff017e;
 
 h1 {
     text-align: center;
-    color: #fff;
+    color: @color1;
 }
 
 #board {
@@ -22,25 +19,26 @@ h1 {
         text-align: center;
         font-size: 40pt;
         border-collapse: collapse;
-        border: 2px solid #FF017E;
+        border: 2px solid @color2;
         text-transform: uppercase;
         background-color: rgba(255,255,255,0.8);
         color: #999999;
         padding: 5px 15px;
-
-        &.open:hover {
-            background-color: #eee;
-            cursor: pointer;
-        }
-        &.closed:active {
-            background-color: #FF9D9D;
-        }
 
         img {
             max-width: 100%;
             max-height: 115px;
         }
     }
+}
+
+.open:hover,
+.open:active {
+    background-color: #eee;
+    cursor: pointer;
+}
+.closed:active {
+    background-color: #FF9D9D;
 }
 
 .game-over .closed:active,
@@ -52,10 +50,10 @@ h1 {
     width: 354px;
     margin: 0 auto;
     text-align: center;
-    color: #ffffff;
+    color: @color1;
 
     h2 {
-        margin: 0;
+        margin: 20px 0 0;
     }
 }
 
@@ -63,7 +61,7 @@ h1 {
     width: 50%;
     background-color: #000;
     float: left;
-    border: 2px solid #ffffff;
+    border: 2px solid @color1;
     padding: 5px;
     margin: 20px 0;
 
@@ -73,6 +71,11 @@ h1 {
         font-size: 20px;
         margin-bottom: 15px;
     }
+}
+
+.winner {
+    color: @color2;
+    border: 2px solid @color2;
 }
 
 /* minimal
@@ -87,7 +90,7 @@ button.minimal {
   font: bold 12px/1 "helvetica neue", helvetica, arial, sans-serif;
   padding: 8px 0 9px;
   text-align: center;
-  text-shadow: 0 1px 0 #fff;
+  text-shadow: 0 1px 0 @color1;
   width: 150px; }
   button.minimal:hover {
     background: #d9d9d9;

@@ -341,19 +341,19 @@ Copyright (c) 2014 Daniel Eden
   -webkit-animation-name: blinker;
   -webkit-animation-duration: 1s;
   -webkit-animation-timing-function: linear;
-  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: 3;
   -moz-animation-name: blinker;
   -moz-animation-duration: 1s;
   -moz-animation-timing-function: linear;
-  -moz-animation-iteration-count: infinite;
+  -moz-animation-iteration-count: 3;
   -webkit-animation-name: blinker;
           animation-name: blinker;
   -webkit-animation-duration: 1s;
           animation-duration: 1s;
   -webkit-animation-timing-function: linear;
           animation-timing-function: linear;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: 3;
+          animation-iteration-count: 3;
 }
 @-webkit-keyframes blinker {
   0% {
@@ -393,14 +393,9 @@ body {
   background-image: url(../img/bg.jpg);
   background-size: cover;
 }
-body {
-  /*background-image: url(../img/bg-random.jpg);
-    /*background-size: cover;
-    */
-}
 h1 {
   text-align: center;
-  color: #fff;
+  color: #ffffff;
 }
 #board {
   width: 354px;
@@ -415,22 +410,23 @@ h1 {
   text-align: center;
   font-size: 40pt;
   border-collapse: collapse;
-  border: 2px solid #FF017E;
+  border: 2px solid #ff017e;
   text-transform: uppercase;
   background-color: rgba(255, 255, 255, 0.8);
   color: #999999;
   padding: 5px 15px;
 }
-#board td.open:hover {
-  background-color: #eee;
-  cursor: pointer;
-}
-#board td.closed:active {
-  background-color: #FF9D9D;
-}
 #board td img {
   max-width: 100%;
   max-height: 115px;
+}
+.open:hover,
+.open:active {
+  background-color: #eee;
+  cursor: pointer;
+}
+.closed:active {
+  background-color: #FF9D9D;
 }
 .game-over .closed:active,
 .game-over .open:hover {
@@ -443,7 +439,7 @@ h1 {
   color: #ffffff;
 }
 .results h2 {
-  margin: 0;
+  margin: 20px 0 0;
 }
 .scoreboard {
   width: 50%;
@@ -458,6 +454,10 @@ h1 {
   font-size: 20px;
   margin-bottom: 15px;
 }
+.winner {
+  color: #ff017e;
+  border: 2px solid #ff017e;
+}
 /* minimal
 ************/
 button.minimal {
@@ -469,7 +469,7 @@ button.minimal {
   font: bold 12px/1 "helvetica neue", helvetica, arial, sans-serif;
   padding: 8px 0 9px;
   text-align: center;
-  text-shadow: 0 1px 0 #fff;
+  text-shadow: 0 1px 0 #ffffff;
   width: 150px;
 }
 button.minimal:hover {

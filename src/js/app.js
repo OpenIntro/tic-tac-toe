@@ -59,9 +59,11 @@ function change_cell(cell) {
 // checks for winners
 function check_winner(t){ 
     if (check_rows(t) || check_cols(t) || check_diag(t)) {
+        game_over = true;
         end_game.winner(t);
     }
     else if (play_count == 9) {
+        game_over = true;
         end_game.tie();
     }
     else {
@@ -72,6 +74,7 @@ function check_winner(t){
 // what to do when the game ends
 var end_game = {
     winner : function(t) {
+        $('#board').addClass('game-over');
         score = turn.current_player();
     
         if (turn.current_player() === 1) {
@@ -84,11 +87,12 @@ var end_game = {
         }
 
         $('#player-'+turn.current_player()+' .score-total').text(score);
-        $('.results h2').text('Player '+ t +' wins the game!');
+        $('#player-'+turn.current_player()).addClass('winner');
     },
 
     tie : function(){
-        $('.results h2').text('It\'s a tie!');
+        $('#board').addClass('game-over');
+        $('.results').prepend('<h2>It\'s a tie!</h2>');
     }
 };
 
@@ -134,7 +138,8 @@ $(function() {
     $('#restart').on('click', function() {
         $('#board td.closed').html('').removeClass().addClass('open');
         $('#board').removeClass('game-over');
-        $('.results h2').text('')
+        $('.scoreboard').removeClass('winner');
+        $('.results h2').remove();
         play_count = 0;
         game_over = false;
     });
