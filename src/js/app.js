@@ -1,0 +1,165 @@
+var piece_x = 'X';
+var piece_o = 'O';
+var anim_x = 'fadeIn';
+var anim_o = 'fadeIn';
+var score_1 = 0;
+var score_2 = 0;
+var score = 0;
+var play_count = 1;
+var game_over = false;
+
+// track the turn
+var turn = {
+    number : 0,
+    current_player : function() {
+        if (this.number % 2 === 0) {
+            return 1;
+        }
+        else {
+            return 2;
+        }
+    },
+    change_turn : function(){
+        this.number += 1;
+    }
+};
+
+
+// is this cell available
+function check_cell(cell) {
+    var cell_content = $(cell).html();
+
+    if (cell_content === '') {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+// if cell is empty, cell is marked with player's piece
+function change_cell(cell) {
+    var cellID = $(cell).attr('id');
+    var cellNo   = parseInt(cellID.replace(/[^0-9\.]/g, ''), 10);
+
+    if (turn.current_player() === 1) {
+        $(cell).html('<span class="' + anim_x +' animated">'+piece_x+'</span>').addClass('X');
+        check_winner('X');
+    }
+    else {
+        $(cell).html('<span class="' + anim_o +' animated">'+piece_o+'</span>').addClass('O');
+        check_winner('O');
+    }
+    $(cell).removeClass('open').addClass('closed');
+
+    turn.change_turn();
+    play_count = play_count + 1;
+}
+
+// checks for winners
+function check_winner(t){ 
+    if (check_rows(t) || check_cols(t) || check_diag(t)) {
+        end_game.winner(t);
+    }
+    else if (play_count == 9) {
+        end_game.tie();
+    }
+    else {
+        return false;
+    }
+}
+
+// what to do when the game ends
+var end_game = {
+    winner : function(t) {
+        score = turn.current_player();
+    
+        if (turn.current_player() === 1) {
+            score_1 = score_1+1;
+            score = score_1;
+        }
+        else {
+            score_2 = score_2+1;
+            score = score_2;
+        }
+
+        $('#player-'+turn.current_player()+' .score-total').text(score);
+        $('.results h2').text('Player '+ t +' wins the game!');
+    },
+
+    tie : function(){
+        $('.results h2').text('It\'s a tie!');
+    }
+};
+
+
+function check_rows(t) {
+    if ( $('#cell-1').hasClass(t) && $('#cell-2').hasClass(t) && $('#cell-3').hasClass(t) ||
+         $('#cell-4').hasClass(t) && $('#cell-5').hasClass(t) && $('#cell-6').hasClass(t) ||
+         $('#cell-7').hasClass(t) && $('#cell-8').hasClass(t) && $('#cell-9').hasClass(t) ) {
+         return true;
+    }
+    else { return false; }
+}
+function check_cols(t) {
+    if ( $('#cell-1').hasClass(t) && $('#cell-4').hasClass(t) && $('#cell-7').hasClass(t) ||
+         $('#cell-2').hasClass(t) && $('#cell-5').hasClass(t) && $('#cell-8').hasClass(t) ||
+         $('#cell-3').hasClass(t) && $('#cell-6').hasClass(t) && $('#cell-9').hasClass(t) ) {
+         return true;
+    }
+    else { return false; }
+}
+function check_diag(t) {
+    if ( $('#cell-1').hasClass(t) && $('#cell-5').hasClass(t) && $('#cell-9').hasClass(t) ||
+         $('#cell-3').hasClass(t) && $('#cell-5').hasClass(t) && $('#cell-7').hasClass(t) ) {
+         return true;
+    }
+    else { return false; }
+}
+
+$(function() {
+
+    $('#board td').addClass('open');
+
+    $('#board td').on('click', function() {
+        // Check if cell is 0 on the board
+        if (!game_over) {
+            if(check_cell(this)) {
+                change_cell(this);
+            }
+        }
+
+    });
+
+    $('#restart').on('click', function() {
+        $('#board td.closed').html('').removeClass().addClass('open');
+        $('#board').removeClass('game-over');
+        $('.results h2').text('')
+        play_count = 0;
+        game_over = false;
+    });
+
+
+
+    // konami all the things
+    $( window ).konami({
+        cheat: function() {
+            console.log( 'Lyft code activated!' );
+            $('html').addClass('lyft');
+
+            $('h1').text('Lyft Tac Toe');
+
+            piece_x = '<img src="../img/mustache.png">';
+            piece_o = '<img src="../img/balloon.png">';
+            anim_x = 'rubberBand';
+            anim_o = 'fadeInUpBig';
+
+            $('#board td span:contains("X")').html(piece_x);
+            $('#board td span:contains("O")').html(piece_o);
+
+            $('#player-1 .score-header').text('Staches');
+            $('#player-2 .score-header').text('Balloons');
+        }
+    });
+
+}); // end ready
