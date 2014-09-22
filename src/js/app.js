@@ -92,9 +92,9 @@ var end_game = {
 
     tie : function(){
         $('#board').addClass('game-over');
-        $('.results').prepend('<h2>It\'s a tie!</h2>');
+        $('.results').prepend('<h2>Its a tie!</h2>');
     }
-};
+}; 
 
 
 function check_rows(t) {
@@ -140,7 +140,7 @@ $(function() {
         $('#board').removeClass('game-over');
         $('.scoreboard').removeClass('winner');
         $('.results h2').remove();
-        play_count = 0;
+        play_count = 1;
         game_over = false;
     });
 
