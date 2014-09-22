@@ -149,8 +149,8 @@ $(function() {
 
             $('h1').text('Lyft Tac Toe');
 
-            piece_x = '<img src="../img/mustache.png">';
-            piece_o = '<img src="../img/balloon.png">';
+            piece_x = '<img src="img/mustache.png">';
+            piece_o = '<img src="img/balloon.png">';
             anim_x = 'rubberBand';
             anim_o = 'fadeInUpBig';
 
