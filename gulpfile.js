@@ -1,5 +1,5 @@
 var gulp = require('gulp'),
-	  less = require('gulp-less'),
+    less = require('gulp-less'),
     autoprefixer = require('gulp-autoprefixer'),
     minifycss = require('gulp-minify-css'),
     jshint = require('gulp-jshint'),

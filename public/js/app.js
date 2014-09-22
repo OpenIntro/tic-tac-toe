@@ -92,7 +92,7 @@ var end_game = {
 
     tie : function(){
         $('#board').addClass('game-over');
-        $('.results').prepend('<h2>Its a tie!</h2>');
+        $('.results').prepend('<h2>It\'s a tie!</h2>');
     }
 }; 
 
